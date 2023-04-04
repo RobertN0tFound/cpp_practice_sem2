@@ -78,12 +78,9 @@ public:
 	unsigned short getYear() {
 		return year;
 	}
-	string getDate()
-	{
-		char date[11];
-		sprintf(date, "%02d.%02d.%04d%", day, month, year);
-		return date;
-	};
+	auto getDate() {
+		return to_string(day) + "." + to_string(month) + "." + to_string(year);
+	}
 
 	// Установка данных
 	void setDay(int _day) {
@@ -108,6 +105,32 @@ public:
 			month = _month;
 			year = _year;
 		};
+	}
+
+	void printDate(unsigned short day, unsigned short month, unsigned short year, int wLine) {
+		int w = 10;
+		int len = (wLine - w) / 2 - 1;
+		cout << left;
+		cout.width(len); cout << " ";
+		if (day > 9) {
+			cout << day;
+		}
+		else {
+			cout << "0" << day;
+		}
+		cout << ".";
+		if (month > 9) {
+			cout << month;
+		}
+		else {
+			cout << "0" << month;
+		}
+		cout << ".";
+		if (year == 0) {
+			cout << "00" << year;
+		}
+		cout << year;
+		cout.width(len); cout << " ";
 	}
 
 	void operator = (const DateClass &other) {
@@ -340,8 +363,8 @@ void DrawTable(class RecordClass* Records)
 		cout << temp->getRAM();
 		cout << "|"; cout.width(14);
 		cout << temp->getType();
-		cout << "|"; cout.width(13);
-		tmp.getDate();
+		cout << "|"; cout.width(15);
+		tmp.printDate(tmp.getDay(), tmp.getMonth(), tmp.getYear(), 26);
 		cout << "|" << endl;
 		temp = temp->getNext();
 	}
@@ -375,7 +398,7 @@ void DrawTable(class RecordClass dinList[ARR_SIZE], int rowCount)
 		cout << "|"; cout.width(14);
 		cout << dinList[i].getType();
 		cout << "|"; cout.width(13);
-		tmp.getDate();
+		tmp.printDate(tmp.getDay(), tmp.getMonth(), tmp.getYear(), 26);
 		cout << "|" << endl;
 	}
 	cout << internal; cout << "|"; cout.width(85); cout.fill('-'); cout << "|" << endl; cout.fill(' ');
@@ -488,7 +511,7 @@ int main()
 
 	cout << endl << endl << "Практическая работа № 4 (Работа с файлами)";
 
-	/*fopen_s(&textFile, FDB, "rt");
+	fopen_s(&textFile, FDB, "rt");
 	fopen_s(&binaryFile, BDB, "rb");
 	char temp[20];
 	date = readRecords.getDate();
@@ -524,5 +547,5 @@ int main()
 	}
 	fclose(textFile);
 	fclose(binaryFile);
-	DrawTable();*/
+	DrawTable();
 }
