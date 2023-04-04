@@ -337,7 +337,7 @@ public:
 	}
 };
 
-void DrawTable(class RecordClass* Records)
+void DrawTable(void)
 {
 	class RecordClass* temp;
 	class DateClass tmp;
@@ -441,14 +441,14 @@ int main()
 	fclose(textFile);
 	fclose(binaryFile);
 	cout << "Исходные данные:";
-	DrawTable(Records);
+	DrawTable();
 
 	cout << endl << "Практическая работа № 1 (Удаление элемента структуры с определенным наименованием)";
 
 	cout << endl << endl << "Введите наименование, которое хотите удалить: ";
 	cin.getline(sDelete, 20);
 	Records->deleteItem(sDelete);
-	DrawTable(Records);
+	DrawTable();
 
 	cout << endl << "Практическая работа № 2 (Динамические массивы)";
 
@@ -511,7 +511,7 @@ int main()
 
 	cout << endl << endl << "Практическая работа № 4 (Работа с файлами)";
 
-	fopen_s(&textFile, FDB, "rt");
+	/*fopen_s(&textFile, FDB, "rt");
 	fopen_s(&binaryFile, BDB, "rb");
 	char temp[20];
 	date = readRecords.getDate();
@@ -534,9 +534,9 @@ int main()
 			readRecords.date.month,
 			readRecords.date.year });
 
-		fread(&readRecords, sizeof(Record), 1, binaryFile);
-		snprintf(temp, 20, "%s-b", readRecords.name);
-		addItem(
+		fread(&readRecords, sizeof(RecordClass), 1, binaryFile);
+		snprintf(temp, 20, "%s-b", readRecords.getName());
+		readRecords.addItem(
 			temp,
 			readRecords.freq,
 			readRecords.ram,
@@ -547,5 +547,5 @@ int main()
 	}
 	fclose(textFile);
 	fclose(binaryFile);
-	DrawTable();
+	DrawTable();*/
 }
